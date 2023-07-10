@@ -1,30 +1,52 @@
-import { defineConfig } from 'astro/config';
-import starlight from '@astrojs/starlight';
+import { defineConfig } from "astro/config";
+import starlight from "@astrojs/starlight";
+
+import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [
     starlight({
-      title: 'My Docs',
-      social: {
-        github: 'https://github.com/withastro/starlight',
+      title: "Sailhouse",
+      head: [
+        {
+          tag: "link",
+          attrs: {
+            rel: "shortcut icon",
+          },
+          content: "/favicon.ico",
+        },
+      ],
+      logo: {
+        src: "/src/assets/logo.svg",
       },
+      social: {
+        github: "https://github.com/withastro/starlight",
+      },
+      customCss: ["/src/styles/main.css"],
       sidebar: [
         {
-          label: 'Guides',
+          label: "Getting Started",
           items: [
-            // Each item here is one entry in the navigation menu.
-            { label: 'Example Guide', link: '/guides/example/' },
+            {
+              label: "Setup",
+              link: "/getting-started/setup/",
+            },
           ],
         },
         {
-          label: 'Reference',
-          autogenerate: { directory: 'reference' },
+          label: "Reference",
+          autogenerate: {
+            directory: "reference",
+          },
         },
       ],
     }),
   ],
-
   // Process images with sharp: https://docs.astro.build/en/guides/assets/#using-sharp
-  image: { service: { entrypoint: 'astro/assets/services/sharp' } },
+  image: {
+    service: {
+      entrypoint: "astro/assets/services/sharp",
+    },
+  },
 });
