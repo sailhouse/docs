@@ -2,13 +2,13 @@
 title: CLI
 ---
 
-# List Teams
+## List Teams
 
 ```bash
 sailhouse teams list
 ```
 
-# Set team
+## Set team
 
 ```bash
 sailhouse teams set
