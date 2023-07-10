@@ -3,3 +3,4 @@ command="astro dev"
 
 [build]
 command="pnpm build"
+publish="dist"
