@@ -25,3 +25,30 @@ sailhouse apps create [slug]
 ```
 
 Oh yeah, we do everything with slugs too.
+
+## Get sending events
+
+We have a few language-native SDKs/clients available
+
+- [GoLang](https://github.com/sailhouse/sdk-go)
+- [TypeScript](https://github.com/sailhouse/sdk-ts)
+
+### Creating a token
+
+With your CLI authenticated, you can create a token easily
+
+```bash
+sailhouse tokens create
+```
+
+Then, taking the `sh_app_` prefixed value, you can store that in an environment variable on the platform you're running in.
+
+### Using the Go SDK
+
+```go
+import sailhouse "github.com/sailhouse/sdk-go"
+
+func main() {
+    client := sailhouse.NewClient(os.Getenv("SAILHOUSE_TOKEN"))
+}
+```
