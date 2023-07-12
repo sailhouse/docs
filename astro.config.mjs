@@ -35,6 +35,12 @@ export default defineConfig({
           ],
         },
         {
+          label: "SDKs",
+          autogenerate: {
+            directory: "sdks",
+          },
+        },
+        {
           label: "Reference",
           autogenerate: {
             directory: "reference",

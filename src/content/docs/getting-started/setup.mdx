@@ -45,10 +45,59 @@ Then, taking the `sh_app_` prefixed value, you can store that in an environment 
 
 ### Using the Go SDK
 
+Below is an example for utilising the Go SDK on a [Netlify Function](https://docs.netlify.com/functions/create/?fn-language=go#create-function-file-3)
+
 ```go
-import sailhouse "github.com/sailhouse/sdk-go"
+package main
+
+import (
+	"os"
+
+	"github.com/aws/aws-lambda-go/events"
+	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/sailhouse/sdk-go/sailhouse"
+)
+
+func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
+	client := sailhouse.NewSailhouseClient(os.Getenv("SAILHOUSE_TOKEN"))
+
+	client.Publish("awesome-example", map[string]string{
+		"message": "Hello World!",
+	})
+
+	return &events.APIGatewayProxyResponse{
+		StatusCode: 200,
+		Body:       "Hello World!",
+	}, nil
+}
 
 func main() {
-    client := sailhouse.NewClient(os.Getenv("SAILHOUSE_TOKEN"))
+	lambda.Start(handler)
 }
+
+```
+
+### Using the TypeScript SDK
+
+Below is another example of using the TypeScript SDK within a Netlify Function.
+
+```ts
+import { Handler } from "@netlify/functions";
+import { SailhouseClient } from "@sailhouse/client";
+
+export const handler: Handler = async (event, _) => {
+  const { body } = event;
+  const { email, type } = JSON.parse(body ?? "{}");
+
+  const client = new SailhouseClient(process.env.SAILHOUSE_API_KEY!);
+
+  await client.publish("signups", {
+    email,
+    type,
+  });
+
+  return {
+    statusCode: 200,
+  };
+};
 ```
