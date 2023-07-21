@@ -4,9 +4,9 @@ title: CLI
 
 ## Installing the CLI
 
-The CLI can easily be installed via `brew`.
-
 ### MacOS
+
+The CLI can easily be installed via `brew`.
 
 ```sh
 brew install sailhouse
