@@ -11,3 +11,9 @@ Tokens are easily generated from the CLI.
 ```sh
 sailhouse tokens create
 ```
+
+## List generated tokens
+
+```sh
+sailhouse tokens list
+```
