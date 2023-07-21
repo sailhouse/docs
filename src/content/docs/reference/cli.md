@@ -27,7 +27,7 @@ sailhouse auth
 This will open a browser session, where you can login to authenticate the client against your user.
 
 The token this generates will expire after 30 days.
-
+<!--
 ## Command Reference
 
 ### List teams
@@ -58,4 +58,4 @@ sailhouse apps create
 
 ```bash
 sailhouse tokens create [app]
-```
+``` -->
