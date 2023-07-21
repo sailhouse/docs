@@ -12,3 +12,18 @@ hero:
       icon: right-arrow
       variant: primary
 ---
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Some fun things
+
+<CardGrid stagger>
+  <Card title="TypeScript SDK" icon="laptop">
+    Get up to speed on using [Sailhouse in Typescript](/sdks/typescript)
+  </Card>
+  <Card title="GoLang SDK" icon="laptop">
+    Dive into Sailhouse with the [Go SDK](/sdks/go)
+  </Card>
+  <Card title="Try the CLI" icon="forward-slash">
+    Dig into the command line with the [CLI reference](/reference/cli)
+  </Card>
+</CardGrid>
