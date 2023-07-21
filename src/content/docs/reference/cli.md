@@ -6,13 +6,15 @@ title: CLI
 
 The CLI can easily be installed via `brew`.
 
+### MacOS
+
 ```sh
 brew install sailhouse
 ```
 
-:::note
-Currently the CLI can only be installed via homebrew, other platforms and deployment solutions are in the works.
-:::
+### Others
+
+Binaries for Windows and Linux can be downloaded from the [releases page on Github](https://github.com/sailhouse/cli/releases)
 
 ## Authenticating
 
