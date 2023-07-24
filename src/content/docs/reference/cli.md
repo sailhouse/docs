@@ -9,7 +9,7 @@ title: CLI
 The CLI can easily be installed via `brew`.
 
 ```sh
-brew install sailhouse
+brew install sailhouse/tap/sailhouse
 ```
 
 ### Others
