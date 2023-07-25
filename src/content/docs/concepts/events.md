@@ -19,9 +19,17 @@ client.publish("some-topic", {
 });
 ```
 
+As mentioned above, an event must be sent to a topic. This directs your event to downstream subscribers, and acts as a "bucket" that your different types of events can live in. To read more fun things about topics, head over to [their concepts section](/concepts/topics).
+
+## Limitations
+
+:::caution
+This will change throughout the course of the Beta. We may impose data size limits, or other such restrictions, to maintain the performance of the application and promote good usage.
+:::
+
 ## Metadata
 :::note[Future thing]
 This is currently in-development and not available for public access.
 :::
 
-Events can have meta-data attached to them, in an entirely customisable
+Events can have metadata attached to them. For attaching trace-ids
