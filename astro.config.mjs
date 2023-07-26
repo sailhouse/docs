@@ -41,6 +41,12 @@ export default defineConfig({
           },
         },
         {
+          label: "Concepts",
+          autogenerate: {
+            directory: "concepts",
+          },
+        },
+        {
           label: "Reference",
           autogenerate: {
             directory: "reference",
