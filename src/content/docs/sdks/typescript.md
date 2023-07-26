@@ -29,7 +29,7 @@ const client = new SailhouseClient(process.env.SAILHOUSE_TOKEN);
 
 ### Sending an event
 
-The client has an async `publish` method for sending data to a given topic
+The client has an async `publish` method for sending data to a given topic.
 
 ```ts
 await client.publish("some-topic", {
@@ -44,4 +44,18 @@ The second argument can be any object. Ideally, this should just be a map, as th
 
 ### Recieving events from a pull subscription
 
-The client wonderfully includes...
+The client has a `getEvents` method for pull subscriptions.
+
+
+```ts
+const { events } = await client.getEvents<Message>(
+    "awesome-example",
+    "awesome-pull"
+);
+
+await Promise.all(events.map(async (event) => {
+// Do something with the event 🤔
+
+await event.ack();
+}));
+```

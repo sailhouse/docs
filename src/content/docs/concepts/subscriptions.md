@@ -42,6 +42,10 @@ Pull subscriptions require the consuming application to request the events ad-ho
 
 They allow you to build processing-heavy workflows that only consume new data extremely easily. Instead of having to perform a complex, expensive query on a database, you just pull all the new events through.
 
+### Time Window
+
+
+
 ## Subscription Filters
 
 Subscription filters is one of the developer-focused features of the platform.
@@ -50,14 +54,28 @@ When it comes to building an event-driven system, the decision of making a gener
 
 If it's too generic, many consumers will recieve events they don't care about. If it's too narrow in scope, you'll have several events being sent as part of the same operation, making it hard to understand the flows and what triggers where.
 
-Subscription filters allow you to keep your **topics generic**, while reducing noise and cost. You can instruct subscriptions to only care about certain events, dynamically.
+Subscription filters allow you to keep your **topics generic**, while reducing noise and cost. You can instruct subscriptions to only care about certain events, dynamically. It keeps your code simple, and your costs down.
+
+:::note[Future thing]
+The full power of subscription filters lies beyond `key=value` pairs, and this will be something we expand on as the platform develops.
+:::
 
 ### Filter Path
 
 The filter path is the simple JSON path to the property you want to filter on.
 
-- `user.type`
-- `order.address.country`
-- `error.level`
+| Event | Path|
+| --- | --- |
+| `user-created` | `user.type` |
+| `order-created` | `order.address.country` |
+| `application-updated` | `application.status` |
 
 ### Filter Value
+
+The filter value is the value for a subscription to match on, following the examples above.
+
+| Value | Example |
+| --- | --- |
+| `pro` | Create the customer on stripe and start their trial. |
+| `UK` | For the UK, you may need to run extra logic for imports and taxes. |
+| `rejected` | When an application is rejected, we should email the candidate. Not all updates need contact. |
