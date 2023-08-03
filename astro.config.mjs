@@ -9,6 +9,7 @@ export default defineConfig({
     starlight({
       title: "Sailhouse",
       favicon: "/favicon.ico",
+      editLink: { baseUrl: "https://github.com/sailhouse/docs/edit/main" },
       logo: {
         src: "/src/assets/logo.svg",
       },
