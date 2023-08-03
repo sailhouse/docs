@@ -9,15 +9,6 @@ export default defineConfig({
     starlight({
       title: "Sailhouse",
       favicon: "/favicon.ico",
-      //   head: [
-      //     {
-      //       tag: "link",
-      //       attrs: {
-      //         rel: "shortcut icon",
-      //       },
-      //       content: "/favicon.ico",
-      //     },
-      //   ],
       logo: {
         src: "/src/assets/logo.svg",
       },
