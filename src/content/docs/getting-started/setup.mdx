@@ -35,7 +35,9 @@ We have a few language-native SDKs/clients available
 
 ### Creating a token
 
-With your CLI authenticated, you can create a token easily
+To send an event on Sailhouse, you need a token to authenticate the SDK.
+
+With your CLI authenticated, you can create a token easily.
 
 ```bash
 sailhouse tokens create
@@ -45,59 +47,47 @@ Then, taking the `sh_app_` prefixed value, you can store that in an environment 
 
 ### Using the Go SDK
 
-Below is an example for utilising the Go SDK on a [Netlify Function](https://docs.netlify.com/functions/create/?fn-language=go#create-function-file-3)
+First, adding the SDK package
+
+```bash
+go get -u github.com/sailhouse/sdk-go/sailhouse
+```
+
+Then, a basic example which reads the token from an environment variable `SAILHOUSE_TOKEN`.
 
 ```go
 package main
 
 import (
-	"os"
-
-	"github.com/aws/aws-lambda-go/events"
-	"github.com/aws/aws-lambda-go/lambda"
-	"github.com/sailhouse/sdk-go/sailhouse"
+    "github.com/sailhouse/go-sdk/sailhouse"
 )
 
-func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
+func main() {
 	client := sailhouse.NewSailhouseClient(os.Getenv("SAILHOUSE_TOKEN"))
 
 	client.Publish("awesome-example", map[string]string{
 		"message": "Hello World!",
 	})
-
-	return &events.APIGatewayProxyResponse{
-		StatusCode: 200,
-		Body:       "Hello World!",
-	}, nil
 }
-
-func main() {
-	lambda.Start(handler)
-}
-
 ```
 
 ### Using the TypeScript SDK
 
-Below is another example of using the TypeScript SDK within a Netlify Function.
+First, installing the SDK.
+
+```bash
+npm install @sailhouse/client
+```
+
+Then a basic example ,taking advantage of top-level await.
 
 ```ts
-import { Handler } from "@netlify/functions";
 import { SailhouseClient } from "@sailhouse/client";
 
-export const handler: Handler = async (event, _) => {
-  const { body } = event;
-  const { email, type } = JSON.parse(body ?? "{}");
+const client = new SailhouseClient(process.env.SAILHOUSE_TOKEN);
 
-  const client = new SailhouseClient(process.env.SAILHOUSE_API_KEY!);
-
-  await client.publish("signups", {
-    email,
-    type,
-  });
-
-  return {
-    statusCode: 200,
-  };
-};
+await client.publish("signups", {
+    email: 'hello@sailhouse.dev',
+    type: 'pro',
+});
 ```

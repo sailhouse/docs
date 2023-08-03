@@ -35,15 +35,21 @@ export default defineConfig({
           ],
         },
         {
+          label: "Concepts",
+          autogenerate: {
+            directory: "concepts",
+          },
+        },
+        {
           label: "SDKs",
           autogenerate: {
             directory: "sdks",
           },
         },
         {
-          label: "Concepts",
+          label: "Using on",
           autogenerate: {
-            directory: "concepts",
+            directory: "using-on",
           },
         },
         {

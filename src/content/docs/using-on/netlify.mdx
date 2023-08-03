@@ -1,0 +1,79 @@
+---
+title: Netlify
+---
+
+Netlify has [Netlify Functions](https://docs.netlify.com/functions/overview/) which allow you to write what are essentially lambda functions trivially in the same code-base as your frontend application.
+
+### Configuring the token
+
+Given we're [authenticated with the CLI](/reference/cli#Authenticating), we can easily set the Netlify environment variable from the command line.
+
+```bash
+netlify env:set SAILHOUSE_TOKEN=$(sailhouse tokens create --app <app-slug>)
+```
+
+You could do this instead on the Netlify Dashboard, and you can read more about environment variables in the [Netlify docs](https://docs.netlify.com/environment-variables/overview/)
+
+### Examples
+
+Below are some basic examples to get you started.
+
+
+### Using the Go SDK
+
+Below is an example for utilising the Go SDK on a [Netlify Function](https://docs.netlify.com/functions/create/?fn-language=go#create-function-file-3)
+
+```go
+package main
+
+import (
+	"os"
+
+	"github.com/aws/aws-lambda-go/events"
+	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/sailhouse/sdk-go/sailhouse"
+)
+
+func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
+	client := sailhouse.NewSailhouseClient(os.Getenv("SAILHOUSE_TOKEN"))
+
+	client.Publish("awesome-example", map[string]string{
+		"message": "Hello World!",
+	})
+
+	return &events.APIGatewayProxyResponse{
+		StatusCode: 200,
+		Body:       "Hello World!",
+	}, nil
+}
+
+func main() {
+	lambda.Start(handler)
+}
+
+```
+
+### Using the TypeScript SDK
+
+Below is another example of using the TypeScript SDK within a Netlify Function.
+
+```ts
+import { Handler } from "@netlify/functions";
+import { SailhouseClient } from "@sailhouse/client";
+
+export const handler: Handler = async (event, _) => {
+  const { body } = event;
+  const { email, type } = JSON.parse(body ?? "{}");
+
+  const client = new SailhouseClient(process.env.SAILHOUSE_API_KEY!);
+
+  await client.publish("signups", {
+    email,
+    type,
+  });
+
+  return {
+    statusCode: 200,
+  };
+};
+```
