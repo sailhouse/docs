@@ -8,15 +8,16 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "Sailhouse",
-      head: [
-        {
-          tag: "link",
-          attrs: {
-            rel: "shortcut icon",
-          },
-          content: "/favicon.ico",
-        },
-      ],
+      favicon: "/favicon.ico",
+      //   head: [
+      //     {
+      //       tag: "link",
+      //       attrs: {
+      //         rel: "shortcut icon",
+      //       },
+      //       content: "/favicon.ico",
+      //     },
+      //   ],
       logo: {
         src: "/src/assets/logo.svg",
       },
