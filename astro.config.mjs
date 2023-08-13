@@ -14,7 +14,7 @@ export default defineConfig({
         src: "/src/assets/logo.svg",
       },
       social: {
-        github: "https://github.com/withastro/starlight",
+        github: "https://github.com/sailhouse/docs",
       },
       customCss: ["/src/styles/main.css"],
       sidebar: [
