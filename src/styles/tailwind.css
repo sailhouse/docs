@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    /* --astro-code-color-background: white; */
+    /* --sl-color-bg: theme('colors.slate.50'); */
+}
+
+html[data-theme='light'] {
+    --astro-code-color-background: white;
+    --sl-color-bg: theme('colors.slate.50');
+}
+
+.astro-code {
+    @apply rounded-lg shadow border-l-0 border-r-0 border-t-0 border-b-0
+}
+
+.card {
+    @apply rounded-lg shadow border-l-0 border-r-0 border-t-0 border-b-0
+}
+
+p > img {
+    @apply rounded-lg shadow
+}
