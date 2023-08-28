@@ -1,7 +1,7 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 
-import netlify from "@astrojs/netlify/functions";
+import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
@@ -9,14 +9,21 @@ export default defineConfig({
     starlight({
       title: "Sailhouse",
       favicon: "/favicon.ico",
-      editLink: { baseUrl: "https://github.com/sailhouse/docs/edit/main" },
+      editLink: {
+        baseUrl: "https://github.com/sailhouse/docs/edit/main",
+      },
       logo: {
         src: "/src/assets/logo.svg",
       },
       social: {
         github: "https://github.com/sailhouse/docs",
+        discord: "https://discord.gg/UyvsfJUE93",
       },
-      customCss: ["/src/styles/main.css"],
+      customCss: [
+        "@fontsource-variable/inter",
+        "@fontsource/source-code-pro",
+        "./src/styles/tailwind.css",
+      ],
       sidebar: [
         {
           label: "Getting Started",
@@ -53,6 +60,9 @@ export default defineConfig({
         },
       ],
     }),
+    tailwind({
+      applyBaseStyles: false,
+    }),
   ],
   // Process images with sharp: https://docs.astro.build/en/guides/assets/#using-sharp
   image: {
@@ -60,6 +70,10 @@ export default defineConfig({
       entrypoint: "astro/assets/services/sharp",
     },
   },
+  markdown: {
+    shikiConfig: {
+      //   theme: "github-light",
+    },
+  },
   output: "static",
-  adapter: netlify(),
 });
