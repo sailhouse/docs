@@ -47,6 +47,12 @@ export default defineConfig({
           },
         },
         {
+          label: "Frameworks",
+          autogenerate: {
+            directory: "frameworks",
+          },
+        },
+        {
           label: "Using on",
           autogenerate: {
             directory: "using-on",
