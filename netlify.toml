@@ -1,6 +1,8 @@
 [dev]
-command="astro dev"
+command = "astro dev"
+
 
 [build]
-command="pnpm build"
-publish="dist"
+command = "pnpm build"
+publish = "dist"
+environment = { NODE_VERSION = "18" }
