@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         // Your preferred accent color. Indigo is closest to Starlight’s defaults.
         accent: colors.orange,
+        primary: "#ff8e3c",
         // Your preferred gray scale. Zinc is closest to Starlight’s defaults.
         //   gray: colors.zinc,
       },

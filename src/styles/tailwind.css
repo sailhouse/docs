@@ -21,7 +21,7 @@ a {
 }
 
 .card {
-    @apply rounded-lg shadow border-l-0 border-r-0 border-t-0 border-b-0
+    @apply rounded-lg shadow border-l-0 border-r-0 border-t-0 border-b-0 dark:bg-slate-800
 }
 
 p > img {
@@ -30,4 +30,8 @@ p > img {
 
 .starlight-aside {
     @apply rounded-lg shadow border-l-0
+}
+
+.action.primary {
+    @apply p-3 font-semibold rounded-lg bg-primary text-white
 }
