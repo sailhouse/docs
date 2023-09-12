@@ -56,7 +56,9 @@ data := map[string]interface{}{
     },
 }
 
-err := client.Publish("some-topic", data)
+ctx := context.Background()
+
+err := client.Publish(ctx, "some-topic", data)
 if err != nil {
     panic(err)
 }
@@ -74,7 +76,9 @@ type Message struct {
 }
 
 func main() {
+    ctx := context.Background()
     res, err := client.GetEvents(
+        ctx,
         "awesome-example",
         "awesome-pull",
         sailhouse.WithLimit(20)

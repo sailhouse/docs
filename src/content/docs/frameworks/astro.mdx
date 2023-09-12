@@ -1,0 +1,161 @@
+---
+title: Astro
+---
+
+[Astro](https://astro.build) is a popular web framework for generating static, server or even hybrid-rendered sites and applications.
+
+Sailhouse can be leveraged in [server endpoints](https://docs.astro.build/en/core-concepts/endpoints/#server-endpoints-api-routes), and even directly on pages themselves, via the `@sailhouse/client` package for JavaScript and TypeScript.
+
+## Basic usage
+
+:::note[Watch out!]
+Astro must have [SSR mode enabled](https://docs.astro.build/en/guides/server-side-rendering/#enabling-ssr-in-your-project) for this to work!
+:::
+
+### Server endpoints (API Routes)
+
+Astro's [Server Endpoints](https://docs.astro.build/en/core-concepts/endpoints/#server-endpoints-api-routes) serve as the base for defining a traditional `POST`, `PUT` etc. API handler.
+
+You can utilise the Sailhouse client to handle anything from JSON all the way to form data.
+
+```js
+const client = new SailhouseClient(import.meta.env.SAILHOUSE_TOKEN);
+
+export const POST: APIRoute = async ({ request, redirect }) => {
+    const data = await request.formData();
+
+    await client.publish("email-submitted", {
+      email: data.get("email"),
+    });
+
+    return redirect('/thanks')
+}
+```
+
+### Page SSR
+
+Server Side Rendered pages on Astro execute the JavaScript/TypeScript included in the Frontmatter `---` section at the top of a `.astro` page.
+
+This includes access to a `Request` object via `Astro.request`, allowing you to read in any `POST` data sent to the page (via a form submission etc.)
+
+```astro
+---
+import { SailhouseClient } from "@sailhouse/client";
+
+let submitted = false;
+if (Astro.request.method === "POST") {
+  const data = await Astro.request.formData();
+
+  const client = new SailhouseClient(import.meta.env.SAILHOUSE_TOKEN);
+  await client.publish("email-submitted", {
+    email: data.get("email"),
+  });
+
+  submitted = true;
+}
+---
+
+<div>
+  {submitted && <div style={{ marginBottom: 12 }}>Thanks for submitting!</div>}
+  <form method="post">
+    <input type="email" name="email" />
+    <button type="submit">Submit</button>
+  </form>
+</div>
+```
+
+## Middleware
+
+Astro also includes a very flexible [middleware](https://docs.astro.build/en/guides/middleware/) API for mutating all requests as they come in before being sent to the specific pages or API routes.
+
+The Sailhouse client can be injected via middleware to make it even easier to utilise across your whole application.
+
+:::note
+This section assumes you're familiar with configuring middleware on Astro. If not, some subject matter may appear to be missing context.
+
+[Read more](https://docs.astro.build/en/guides/middleware/)
+:::
+
+### Setting up env.d.ts - TypeScript only
+
+If you're utilising TypeScript, you'll want to configure the `src/env.d.ts` file to include the `SailhouseClient` type on the request types.
+
+```ts
+// env.d.ts
+/// <reference types="astro/client" />
+
+declare namespace App {
+     interface Locals {
+        client: import('@sailhouse/client').SailhouseClient
+     }
+}
+```
+
+### Injecting the client
+
+To inject the client, we first need to create `src/middelware.ts` (or `.js` if you'd like) if it does exist already.
+
+Below is an example focused on _just_ Sailhouse.
+
+```ts
+import { SailhouseClient } from "@sailhouse/client";
+import { defineMiddleware } from "astro:middleware";
+
+export const onRequest = defineMiddleware(async ({locals}, next) => {
+    const client = new SailhouseClient(import.meta.env.SAILHOUSE_TOKEN);
+
+    locals.client = client;
+
+    await next();
+})
+```
+
+### Using the client
+
+Now, on every server-side request, Sailhouse is accessible via the `locals` property.
+
+
+#### Server Endpoints
+
+For server endpoints, notice the destructuring of `locals` to retrieve `client` in the route arguments.
+
+```ts "locals: { client }"
+import type { APIRoute } from "astro";
+
+export const POST: APIRoute = async ({ request, redirect, locals: { client }}) => {
+    const data = await request.formData();
+
+    await client.publish("email-submitted", {
+      email: data.get("email"),
+    });
+
+    return redirect('/thanks')
+}
+```
+
+#### Page SSR
+
+For server-rendered pages, notice the reference to `Astro.locals.client` instead of a freshly instantiated `SailhouseClient` as above.
+
+```astro "Astro.locals.client"
+---
+let submitted = false;
+if (Astro.request.method === "POST") {
+  const data = await Astro.request.formData();
+
+  await Astro.locals.client.publish("email-submitted", {
+    email: data.get("email"),
+  });
+
+  submitted = true;
+}
+---
+
+<div>
+  {submitted && <div style={{ marginBottom: 12 }}>Thanks for submitting!</div>}
+  <form method="post">
+    <input type="email" name="email" />
+    <button type="submit">Submit</button>
+  </form>
+</div>
+```
