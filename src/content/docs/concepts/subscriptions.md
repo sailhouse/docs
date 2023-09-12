@@ -26,7 +26,7 @@ If an event isn't acknowledged in this time frame, it is counted as a [dead lett
 
 ### Dead Letters
 
-"Dead letters" are events that were failed to be delievered, and so are given a status which indicates the platform will not attempt to deliver them until user (ie, developer) intervention.
+"Dead letters" are events that were failed to be delivered, and so are given a status which indicates the platform will not attempt to deliver them until user (ie, developer) intervention.
 
 However, any _new_ events Sailhouse will attempt to deliver as usual.
 
