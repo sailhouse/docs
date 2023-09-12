@@ -81,6 +81,7 @@ This section assumes you're familiar with configuring middleware on Astro. If no
 If you're utilising TypeScript, you'll want to configure the `src/env.d.ts` file to include the `SailhouseClient` type on the request types.
 
 ```ts
+// env.d.ts
 /// <reference types="astro/client" />
 
 declare namespace App {
@@ -118,7 +119,7 @@ Now, on every server-side request, Sailhouse is accessible via the `locals` prop
 
 For server endpoints, notice the destructuring of `locals` to retrieve `client` in the route arguments.
 
-```ts
+```ts "locals: { client }"
 import type { APIRoute } from "astro";
 
 export const POST: APIRoute = async ({ request, redirect, locals: { client }}) => {
@@ -136,7 +137,7 @@ export const POST: APIRoute = async ({ request, redirect, locals: { client }}) =
 
 For server-rendered pages, notice the reference to `Astro.locals.client` instead of a freshly instantiated `SailhouseClient` as above.
 
-```astro
+```astro "Astro.locals.client"
 ---
 let submitted = false;
 if (Astro.request.method === "POST") {

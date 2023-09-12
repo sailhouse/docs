@@ -1,16 +1,24 @@
 ---
 title: Setup
 ---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ## Creating an account
 
 First things first, [get signed in](https://app.sailhouse.dev) and create a team.
 
 Then, install the CLI.
+
+<Tabs>
+<TabItem label='MacOS'>
 ```bash
 brew install sailhouse/tap/sailhouse
 ```
-
+</TabItem>
+<TabItem label="Linux">
+The CLI binary is available to download on the [Releases](https://github.com/sailhouse/cli/releases) page
+</TabItem>
+</Tabs>
 And connect to your fresh-faced, lovely, new account.
 ```bash
 sailhouse auth

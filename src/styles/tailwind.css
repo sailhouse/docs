@@ -12,6 +12,10 @@ html[data-theme='light'] {
     --sl-color-bg: theme('colors.slate.50');
 }
 
+a {
+    @apply no-underline
+}
+
 .astro-code {
     @apply rounded-lg shadow border-l-0 border-r-0 border-t-0 border-b-0
 }
@@ -22,4 +26,8 @@ html[data-theme='light'] {
 
 p > img {
     @apply rounded-lg shadow
+}
+
+.starlight-aside {
+    @apply rounded-lg shadow border-l-0
 }
