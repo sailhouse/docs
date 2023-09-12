@@ -10,6 +10,10 @@ Welcome to the [Sailhouse](https://sailhouse.dev) documentation.
 
 ## Running locally
 
+### Requirements
+- `node` >= 18
+- `pnpm` as a package manager
+
 ### Setup
 
 ```bash
