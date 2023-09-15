@@ -24,14 +24,14 @@ export default defineConfig({
           tag: "meta",
           attrs: {
             property: "og:image",
-            content: "https://sailhouse.dev/og-image.png",
+            content: "https://docs.sailhouse.dev/og-image.png",
           },
         },
         {
           tag: "meta",
           attrs: {
             name: "twitter:image",
-            content: "https://sailhouse.dev/og-image.png",
+            content: "https://docs.sailhouse.dev/og-image.png",
           },
         },
       ],
