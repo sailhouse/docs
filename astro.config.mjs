@@ -19,6 +19,10 @@ export default defineConfig({
       logo: {
         src: "/src/assets/logo.svg",
       },
+      head: {
+        "og:image": "https://docs.sailhouse.dev/og-image.png",
+        "twitter:image": "https://docs.sailhouse.dev/og-image.png",
+      },
       social: {
         github: "https://github.com/sailhouse/docs",
         discord: "https://discord.gg/UyvsfJUE93",
