@@ -34,6 +34,15 @@ export default defineConfig({
             content: "https://docs.sailhouse.dev/og-image.png",
           },
         },
+        {
+          tag: "script",
+          attrs: {
+            defer: true,
+            src: "/js/script.js",
+            "data-domain": "docs.sailhouse.dev",
+            "data-api": "/api/event",
+          },
+        },
       ],
       social: {
         github: "https://github.com/sailhouse/docs",

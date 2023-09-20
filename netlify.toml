@@ -6,3 +6,8 @@ command = "astro dev"
 command = "pnpm build"
 publish = "dist"
 environment = { NODE_VERSION = "18" }
+
+[[redirects]]
+from = "/js/script.js"
+to = "https://plausible.io/js/script.js"
+status = 200
